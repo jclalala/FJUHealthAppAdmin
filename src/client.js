@@ -4,12 +4,12 @@ import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import {applyRouterMiddleware, Router, Route, hashHistory, IndexRedirect, Redirect} from 'react-router';
 import {syncHistoryWithStore, routerMiddleware} from 'react-router-redux';
+import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
 
-const middleware = routerMiddleware(hashHistory);
 const store = createStore(
     reducers,
-    applyMiddleware(middleware)
+    applyMiddleware(routerMiddleware(hashHistory), ReduxThunk)
 );
 
 const history = syncHistoryWithStore(hashHistory, store);
