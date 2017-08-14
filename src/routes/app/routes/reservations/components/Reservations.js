@@ -2,10 +2,18 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {fetchReservations} from '../../../../../actions/Reservations';
 import QueueAnim from 'rc-queue-anim';
+import moment from 'moment';
+import Config from '../../../../../constants/Config';
+
+import AccessTime from 'material-ui/svg-icons/device/access-time';
+import AssignmentTurnedIn from 'material-ui/svg-icons/action/assignment-turned-in';
+import CreditCard from 'material-ui/svg-icons/action/credit-card';
+import RecordVoiceOver from 'material-ui/svg-icons/action/record-voice-over';
+import IconButton from 'material-ui/IconButton';
 
 const ReservationsTable = (props) => (
     <article className="article">
-        <h2 className="article-title">Flip Scroll</h2>
+        <h2 className="article-title">Reservations</h2>
         <div className="box box-default table-box table-flip-scroll mdl-shadow--2dp">
             <table className="mdl-data-table table-bordered table-striped cf no-margin">
                 <thead className="cf">
@@ -24,16 +32,19 @@ const ReservationsTable = (props) => (
                 <tbody>
                 {props.reservations.map((reservation, index) => {
                     return (<tr key={index}>
-                        <td>Test</td>
-                        <td>Test</td>
-                        <td>Test</td>
-                        <td>{reservation.reserveDate}</td>
-                        {/* TODO: Jeff, format with momentJS */}
-                        <td>{reservation.paymentDate}</td>
-                        <td>{reservation.sentPackageDate}</td>
+                        <td>{reservation.user.profile.name}</td>
+                        <td>{reservation.user.profile.phoneNumber}</td>
+                        <td>{reservation.user.profile.gender}</td>
+                        <td>{reservation.reserveDate ? moment(reservation.reserveDate).format(Config.localization.dateFormat) : null}</td>
+                        <td>{reservation.paymentDate ? moment(reservation.paymentDate).format(Config.localization.dateFormat) : null}</td>
+                        <td>{reservation.sentPackageDate ? moment(reservation.sentPackageDate).format(Config.localization.dateFormat) : null}</td>
                         <td>{reservation.agentCalledDate}</td>
                         <td>{reservation.status}</td>
-                        <td>Test</td>
+                        <td style={{textAlign: "center", paddingLeft: 0, paddingRight: 0}}><IconButton> <AccessTime/> </IconButton>
+                            <IconButton> <CreditCard/> </IconButton>
+                            <IconButton> <AssignmentTurnedIn/> </IconButton>
+                            <IconButton> <RecordVoiceOver/> </IconButton>
+                        </td>
                     </tr>)
                 })
                 }
