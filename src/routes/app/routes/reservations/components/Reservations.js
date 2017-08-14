@@ -38,7 +38,7 @@ const ReservationsTable = (props) => (
                         <td>{reservation.reserveDate ? moment(reservation.reserveDate).format(Config.localization.dateFormat) : null}</td>
                         <td>{reservation.paymentDate ? moment(reservation.paymentDate).format(Config.localization.dateFormat) : null}</td>
                         <td>{reservation.sentPackageDate ? moment(reservation.sentPackageDate).format(Config.localization.dateFormat) : null}</td>
-                        <td>{reservation.agentCalledDate}</td>
+                        <td>{reservation.agentCalledDate ? moment(reservation.agentCalledDate).format(Config.localization.dateFormat) : null}</td>
                         <td>{reservation.status}</td>
                         <td style={{textAlign: "center", paddingLeft: 0, paddingRight: 0}}><IconButton> <AccessTime/> </IconButton>
                             <IconButton> <CreditCard/> </IconButton>
