@@ -2,7 +2,6 @@ import React from 'react';
 import Header from 'components/Header';
 import Sidenav from 'components/Sidenav';
 import Footer from 'components/Footer';
-import Customizer from 'components/Customizer';
 
 class MainApp extends React.Component {
   render() {
@@ -25,8 +24,6 @@ class MainApp extends React.Component {
             <Footer />
           </div>
         </section>
-
-        <Customizer />
       </div>
     );
   }
