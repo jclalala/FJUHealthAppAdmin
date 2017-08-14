@@ -2,14 +2,15 @@ import React from 'react';
 import {render} from 'react-dom';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
-import {applyRouterMiddleware, Router, Route, hashHistory, IndexRedirect, Redirect} from 'react-router';
+import {Router, hashHistory} from 'react-router';
 import {syncHistoryWithStore, routerMiddleware} from 'react-router-redux';
 import ReduxThunk from 'redux-thunk';
+import HttpResponseErrorHandler from 'domain/HttpResponseErrorHandler';
 import reducers from './reducers';
 
 const store = createStore(
     reducers,
-    applyMiddleware(routerMiddleware(hashHistory), ReduxThunk)
+    applyMiddleware(routerMiddleware(hashHistory), ReduxThunk, HttpResponseErrorHandler)
 );
 
 const history = syncHistoryWithStore(hashHistory, store);
@@ -22,7 +23,7 @@ const rootRoute = {
     childRoutes: [{
         path: '/',
         component: require('./containers/App'),
-        indexRoute: {onEnter: (nextState, replace) => replace('/app/dashboard')},
+        indexRoute: {onEnter: (nextState, replace) => replace('/login')},
         childRoutes: [
             require('./routes/app'),
             require('./routes/404'),

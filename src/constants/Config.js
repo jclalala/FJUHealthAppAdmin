@@ -2,7 +2,7 @@ const date = new Date();
 const year = date.getFullYear();
 
 const APPCONFIG = {
-    brand: 'Medium',
+    brand: 'FJU Health',
     user: 'Lisa',
     year,
     productLink: 'http://mediumtech.co/',

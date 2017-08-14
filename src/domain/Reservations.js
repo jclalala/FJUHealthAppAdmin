@@ -1,64 +1,26 @@
-import DomainConstants from '../domain/Constants';
+import DomainConstants from './Constants';
+import DomainCommon from './Common';
 
 const ReservationService = {
     listReservations: function () {
-        return fetch(`${DomainConstants.domainApiUrl}/admin/listReservations`).then((res) => {
-            return res.json();
-        })
+        return DomainCommon.fetch(`${DomainConstants.domainApiUrl}/admin/listReservations`);
     },
 
     setReserveDate: function ({reservationId, reserveDate}) {
-        return fetch(`${DomainConstants.domainApiUrl}/admin/${reservationId}/reserveDate`, {
-            method: "PUT",
-            body: JSON.stringify({reserveDate}),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }
-        }).then((res) => {
-            return res.json();
-        })
+        return DomainCommon.fetch(`${DomainConstants.domainApiUrl}/admin/${reservationId}/reserveDate`, "PUT", {reserveDate});
     },
 
     setPaymentDate: function ({reservationId, paymentDate}) {
-        return fetch(`${DomainConstants.domainApiUrl}/admin/${reservationId}/paymentDate`, {
-            method: "PUT",
-            body: JSON.stringify({paymentDate}),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }
-        }).then((res) => {
-            return res.json();
-        })
+        return DomainCommon.fetch(`${DomainConstants.domainApiUrl}/admin/${reservationId}/paymentDate`, "PUT", {paymentDate});
     },
 
     setSentPackageDate: function ({reservationId, sentPackageDate}) {
-        return fetch(`${DomainConstants.domainApiUrl}/admin/${reservationId}/sentPackageDate`, {
-            method: "PUT",
-            body: JSON.stringify({sentPackageDate}),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }
-        }).then((res) => {
-            return res.json();
-        })
+        return DomainCommon.fetch(`${DomainConstants.domainApiUrl}/admin/${reservationId}/sentPackageDate`, "PUT", {sentPackageDate});
     },
 
     setAgentCalledDate: function ({reservationId, agentCalledDate}) {
-        return fetch(`${DomainConstants.domainApiUrl}/admin/${reservationId}/agentCalledDate`, {
-            method: "PUT",
-            body: JSON.stringify({agentCalledDate}),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }
-        }).then((res) => {
-            return res.json();
-        })
+        return DomainCommon.fetch(`${DomainConstants.domainApiUrl}/admin/${reservationId}/agentCalledDate`, "PUT", {agentCalledDate});
     }
-
 }
 
 export default ReservationService;
