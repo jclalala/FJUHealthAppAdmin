@@ -20,6 +20,7 @@ const reservations = (state = initialState, action) => {
             reservation.paymentDate = action.data.paymentDate;
             reservation.sentPackageDate = action.data.sentPackageDate;
             reservation.agentCalledDate = action.data.agentCalledDate;
+            reservation.status = action.data.status;
 
             return {
                 ...state,
