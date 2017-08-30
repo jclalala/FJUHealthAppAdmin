@@ -15,7 +15,8 @@ class Login extends React.Component {
         this.state = {
             brand: APPCONFIG.brand,
             username: "",
-            password: ""
+            password: "",
+            error: null
         };
     }
 
@@ -36,6 +37,7 @@ class Login extends React.Component {
                                         onChange={(event, email) => this.setState({email})}
                                         floatingLabelText="Email"
                                         fullWidth
+                                        errorText={this.state.error ? " " : null}
                                     />
                                 </div>
                                 <div className="form-group">
@@ -44,6 +46,7 @@ class Login extends React.Component {
                                         floatingLabelText="Password"
                                         type="password"
                                         fullWidth
+                                        errorText={this.state.error ? this.state.error.message : null}
                                     />
                                 </div>
                             </fieldset>
@@ -53,6 +56,8 @@ class Login extends React.Component {
                         <a href="#/" className="color-primary" onClick={() => {
                             this.props.login({email: this.state.email, password: this.state.password}).then(() => {
                                 hashHistory.push("/app/dashboard")
+                            }).catch((error) => {
+                                this.setState({error})
                             });
                         }}>Login</a>
                     </div>

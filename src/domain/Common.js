@@ -1,4 +1,11 @@
 let apiToken;
+let localStorage = window.localStorage;
+
+function HttpException(ex) {
+    this.message = ex.message;
+    this.status = ex.status;
+    this.stack = ex.stack;
+}
 
 const DomainCommon = {
     fetch: (url, method, jsonBody) => {
@@ -16,21 +23,23 @@ const DomainCommon = {
                 return response.json();
             else {
                 return response.json().then(function (data) {
-                    throw new Error({...data, status: response.status});
+                    throw new HttpException({...data, status: response.status});
                 });
             }
         });
     },
     setAPIToken: (accessToken) => {
         apiToken = accessToken;
-        console.log("setAPIToken:" + apiToken);
+        localStorage.setItem('accessToken', accessToken);
     },
     clearAPIToken: () => {
         apiToken = undefined;
+        localStorage.removeItem("accessToken");
     }
 };
 
 function getApiTokenHeader() {
+    apiToken = localStorage.getItem('accessToken');
     return apiToken ? {Authorization: apiToken} : {};
 };
 

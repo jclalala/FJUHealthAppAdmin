@@ -3,6 +3,10 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton/IconButton';
 import { hashHistory } from 'react-router';
+import {connect} from 'react-redux';
+import {
+    logout
+} from '../../actions/User';
 
 const ImgIconButtonStyle = {
   width: '60px',
@@ -45,6 +49,7 @@ class NavRightList extends React.Component {
               leftIcon={<i className="material-icons">person_outline</i>}
                         />
             <MenuItem
+              onTouchTap={() => this.props.logout()}
               value="/login"
               primaryText="Log Out"
               innerDivStyle={listItemStyle}
@@ -59,3 +64,15 @@ class NavRightList extends React.Component {
 }
 
 module.exports = NavRightList;
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        logout: () => {
+            return dispatch(logout());
+        }
+    }
+}
+
+module.exports = connect(
+    null, mapDispatchToProps
+)(NavRightList);
