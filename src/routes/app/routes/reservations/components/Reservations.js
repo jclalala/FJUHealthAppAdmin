@@ -36,7 +36,6 @@ class ReservationsTable extends React.Component {
                         <th>Reservation Date</th>
                         <th>Payment Date</th>
                         <th>Package Sent Date</th>
-                        <th>Agent Call Date</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -50,7 +49,6 @@ class ReservationsTable extends React.Component {
                             <td>{reservation.reserveDate ? moment(reservation.reserveDate).format(Config.localization.dateFormat) : null}</td>
                             <td>{reservation.paymentDate ? moment(reservation.paymentDate).format(Config.localization.dateFormat) : null}</td>
                             <td>{reservation.sentPackageDate ? moment(reservation.sentPackageDate).format(Config.localization.dateFormat) : null}</td>
-                            <td>{reservation.agentCalledDate ? moment(reservation.agentCalledDate).format(Config.localization.dateFormat) : null}</td>
                             <td>{reservation.status}</td>
                             <td style={{textAlign: "center", paddingLeft: 0, paddingRight: 0}}>
                                 <IconButton onClick={
@@ -79,15 +77,7 @@ class ReservationsTable extends React.Component {
                                         }
                                     })(reservation.id)
                                 }>
-                                    <AssignmentTurnedIn/> </IconButton>
-                                <IconButton onClick={
-                                    ((reservationId) => {
-                                        return () => {
-                                            this.selectedReservationId = reservationId;
-                                            this.agentCalledDatePicker.openDialog();
-                                        }
-                                    })(reservation.id)
-                                }> <RecordVoiceOver/>
+                                    <AssignmentTurnedIn/>
                                 </IconButton>
                             </td>
                         </tr>)
